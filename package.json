@@ -5,6 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "init:boilerplate": "source ./execute.sh",
+    "set:env": "node ./scripts/set-env.js",
     "start:dev": "tsx watch ./src/server.ts",
     "start": "node build/server.cjs",
     "test": "vitest run",
