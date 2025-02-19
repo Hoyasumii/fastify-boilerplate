@@ -2,10 +2,8 @@
 
 **Powered for**
 
-<div style="display: flex; gap: 5px;">
-  <img src="https://nyc3.digitaloceanspaces.com/itests/uploads/a82f0750-7d73-4f7d-af49-5d62cd6f014d.png" width="48">
-  <img src="https://skillicons.dev/icons?i=ts,prisma,vitest,pnpm">
-</div>
+<img src="https://nyc3.digitaloceanspaces.com/itests/uploads/a82f0750-7d73-4f7d-af49-5d62cd6f014d.png" width="48">
+<img src="https://skillicons.dev/icons?i=ts,prisma,vitest,pnpm">
 
 ### 1. Execute
 
