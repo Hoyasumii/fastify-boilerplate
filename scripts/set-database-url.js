@@ -1,26 +1,8 @@
-import { argv, exit } from "node:process";
+import { exit } from "node:process";
 import path from "node:path";
 import process from "node:process";
 import { existsSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
-
-const envs = {
-  0: "testing",
-  1: "development",
-  2: "production",
-  help: null,
-};
-
-let target = argv[2];
-
-if (!target) target = envs["help"];
-
-if (envs[target] === null || envs[target] === undefined) {
-  console.log("0 - testing");
-  console.log("1 - development");
-  console.log("2 - production\n");
-  exit(0);
-}
 
 const envPath = path.join(process.env.PWD, ".env");
 
@@ -46,7 +28,7 @@ envBuffer
     env[key] = value.join("=");
   });
 
-env["NODE_ENV"] = envs[target];
+env["DATABASE_URL"] = `"postgresql://${env["POSTGRESQL_USERNAME"]}:${env["POSTGRESQL_PASSWORD"]}@localhost:5432/${env["POSTGRESQL_DATABASE"]}?schema=public"`
 
 let newEnv = "";
 
@@ -54,4 +36,4 @@ Object.entries(env).forEach(([key, value]) => {
   newEnv += `${key}=${value}\n`;
 });
 
-await writeFile(envPath, newEnv, { encoding: "utf-8" });
+await writeFile(envPath, newEnv, { encoding: "utf-8" });  
