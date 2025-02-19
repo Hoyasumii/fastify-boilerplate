@@ -16,3 +16,12 @@
 ### Features
 
 1. Set `NODE_ENV` in **CLI**: `pnpm set-env [0 | 1 | 2 | help]`
+
+---
+- [ ] Adicionar CLI mais completa
+  - [ ] Trocar Porta
+  - [ ] Adicionar Controllers, Routes, Services, Repositories, Generators
+  - [ ] Adicionar template de testes
+  - [ ] Features para adicionar libs de JWT, Bcrypt + Arquivo de Configuração
+- [ ] Criar um arquivo de configuração em JSON
+- [ ] Comando para remover o boilerplate do código
