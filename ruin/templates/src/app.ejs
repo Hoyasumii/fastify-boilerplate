@@ -1,23 +1,37 @@
 import fastify from "fastify";
-import cors from "@fastify/cors";
-import cookies from "@fastify/cookie";
-import dotenv from "dotenv";
-import { getLogger } from "@/utils";
 import statusByError from "@/errors/status-by-error";
-import routes from "./routes";
+import routes from "@/routes";
+import dotenv from "dotenv";
+<% if (cors) { %>
+import cors from "@fastify/cors";
+<% } %>
+<% if (cookies) { %>
+import cookies from "@fastify/cookie";
+<% } %>
+<% if (logger) { %>
+import { getLogger } from "@/utils";
+<% } %>
 
 dotenv.config();
 
+<% if (logger) { %>
 const app = fastify({
   logger: getLogger(process.env.NODE_ENV),
 });
+<% } else { %>
+const app = fastify();
+<% } %>
 
+<% if (cors) { %>
 app.register(cors, {
   credentials: true,
   exposedHeaders: [],
 });
+<% } %>
 
+<% if (cookies) { %>
 app.register(cookies);
+<% } %>
 
 app.register(routes);
 

@@ -1,4 +1,4 @@
-# Fastify Boilerplate
+# Ruins.FS - Fastify Boilerplate
 
 **Powered for**
 
@@ -18,6 +18,14 @@
 1. Set `NODE_ENV` in **CLI**: `pnpm set-env [0 | 1 | 2 | help]`
 
 ---
+
+- [ ] Terminar de Criar o Setup
+- [ ] Criar o leitor de .env
+- [ ] Criar o definidor de env.d.ts, comparando com uma possível versão antiga para manter a consistência dos dados
+- [ ] Criar os templates de criação
+
+---
+
 - [ ] Adicionar CLI mais completa
   - [ ] Trocar Porta
   - [ ] Adicionar Controllers, Routes, Services, Repositories, Generators
