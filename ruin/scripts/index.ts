@@ -1,1 +1,1 @@
-export { getGitData } from "./get-git-data";
+export { getGitData } from "../core/get-git-data";

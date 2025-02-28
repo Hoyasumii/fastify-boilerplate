@@ -3,13 +3,9 @@ import statusByError from "@/errors/status-by-error";
 import routes from "@/routes";
 import dotenv from "dotenv";
 
-import { getLogger } from "@/utils";
-
 dotenv.config();
 
-const app = fastify({
-  logger: getLogger(process.env.NODE_ENV),
-});
+const app = fastify();
 
 app.register(routes);
 
