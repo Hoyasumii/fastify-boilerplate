@@ -1,9 +1,12 @@
+import { watch } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
 import process from "node:process";
 import path from "node:path";
 
 export class Env<EnvType extends NodeJS.ProcessEnv> {
+  public static path = path.join(process.env.PWD!, ".env");
   public path = path.join(process.env.PWD!, ".env");
+
   public envDeclarationPath = path.join(process.env.PWD!, "env.d.ts");
 
   async generateType(): Promise<void> {
@@ -43,14 +46,47 @@ export class Env<EnvType extends NodeJS.ProcessEnv> {
 
     await writeFile(this.envDeclarationPath, content, { encoding: "utf-8" });
   }
-  
-  set(key: keyof EnvType, value: string) {}
 
-  rawSet(key: string, value: string) {}
+  async set<TargetKey = keyof EnvType>(
+    key: TargetKey,
+    value: string
+  ): Promise<void> {
+    const envFile = await readFile(this.path, { encoding: "utf-8" });
 
-  static watch() {}
+    const envEntries = envFile
+      .split("\n")
+      .map((propertie) => propertie.split("="));
+
+    const env = Object.fromEntries(envEntries.slice(0, envEntries.length - 1));
+
+    env[key] = value;
+
+    await writeFile(this.path, env, { encoding: "utf8" });
+  }
+
+  async load(): Promise<void> {
+    const envFile = await readFile(this.path, { encoding: "utf-8" });
+
+    const envEntries = envFile
+      .split("\n")
+      .map((propertie) => propertie.split("="));
+
+    envEntries.slice(0, envEntries.length - 1).forEach(([key, value]) => {
+      process.env[key] = value;
+    });
+  }
+
+  static watch() {
+    watch(Env.path, async () => {
+      const envFile = await readFile(this.path, { encoding: "utf-8" });
+
+      const envEntries = envFile
+        .split("\n")
+        .map((propertie) => propertie.split("="));
+
+      envEntries.slice(0, envEntries.length - 1).forEach(([key, value]) => {
+        process.env[key] = value;
+      });
+    });
+  }
 }
-
-const instance = new Env();
-
-console.log(await instance.generateType());
