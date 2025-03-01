@@ -11,23 +11,23 @@ const setupData = await prompt([
     message: "What is your project named?",
     type: "input",
   },
-  // {
-  //   name: "logger",
-  //   message:
-  //     "Do you want enable pino-pretty for logger in development environment?",
-  //   type: "confirm",
-  // },
-  // {
-  //   name: "jwt",
-  //   message: "Do you want enable cors in your project?",
-  //   type: "confirm",
-  // },
+  {
+    name: "logger",
+    message:
+      "Do you want enable pino-pretty for logger in development environment?",
+    type: "confirm",
+  },
+  {
+    name: "jwt",
+    message: "Do you want enable cors in your project?",
+    type: "confirm",
+  },
 ]);
 
-execSync("rm -rf .git")
-execSync("git init")
-execSync("git add .")
-execSync(`git commit -m "Initial Commit"`);
+// execSync("rm -rf .git")
+// execSync("git init")
+// execSync("git add .")
+// execSync(`git commit -m "Initial Commit"`);
 
 
 
